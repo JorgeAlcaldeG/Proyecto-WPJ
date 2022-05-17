@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./../css/login.css">
+    <!-- BOOTSTRAP-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="./../css/index/login.css">
     <title>Cerrar Sesion</title>
 </head>
 <body>
+    <br>
     <?php
     session_start();
 
@@ -22,12 +29,11 @@
                 width: 600,
                 padding: '3em',
                 color: '#716add',
-                background: '#f2344 url(https://sweetalert2.github.io/images/trees.png)',
                 backdrop: `
-                        rgba(0,0,123,0.4)
+                        #02ec9e00
                         url("https://sweetalert2.github.io/images/nyan-cat.gif")
                         left top
-                        no-repeat
+                        repeat
                       `
                 })
                 .then((result) => {

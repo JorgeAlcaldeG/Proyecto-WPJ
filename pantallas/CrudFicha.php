@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil</title>
 
     <!-- CSS -->
 
     <link rel="stylesheet" href="../css/CrudAdministradoresProf/styles.css">
+    <link rel="stylesheet" href="../css/perfil/styles.css">
 
 </head>
 <body>
 <?php
-    include '../proc/conexion.php';
-    include '../funcionesPHP/perfil_func.php';
-    // $id=$_POST[""];
+    include '../funcionesPHP/perfil.php';
 ?>
 <!-- Div nav -->
 <div class="nav">
@@ -23,7 +22,7 @@
     <span id="spanAlumnos">
     <a href="./CrudAdministradoresAlu.php">Alumnos</a>
     </span>
-    <span id="spanProfesores">
+    <span id="spanAlumnos">
         <a href="./CrudAdministradoresProf.php">Profesores</a>
     </span>
     
@@ -34,14 +33,19 @@
 
     <!-- div cabecera -->
     <div class="cabecera">
-        <h2>Profesores</h2>
+        <h2>Perfil</h2>
 
     </div>
     <!-- div pagina -->
     <div class="pagina">
 
     <?php
-        PerfilAlu(1);
+        //perfilProf($_GET["var"]);
+        if($_GET["typeuser"]==1){
+            perfilAlu($_GET["var"]);
+        }else{
+            perfilProf($_GET["var"]);
+        }
     ?>
     </div>
 

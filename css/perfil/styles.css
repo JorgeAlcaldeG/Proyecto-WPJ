@@ -1,0 +1,45 @@
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column-2-foto {
+    width: 25%;
+    float: left;
+    margin-left: 2%;
+}
+
+.column-2 {
+    width: 50%;
+    float: left;
+}
+
+.column-2-text {
+    width: 70%;
+    float: left;
+    margin-left: 3%;
+}
+
+.nombre {
+    font-size: 35px;
+}
+
+#infoTitulo {
+    margin-top: 0%;
+    margin-bottom: 0%;
+    font-size: 20px;
+}
+
+hr {
+    margin-top: 0%;
+    margin-right: 10%;
+}
+
+.infotext {
+    font-size: 15px;
+}
+
+#profilePic {
+    border: 2px solid #000;
+}

@@ -111,6 +111,23 @@ VALUES ('ASIX2-2122', 'ASIX2 curso 2021/2022', 1);
 INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd)
 VALUES ('32673315S','Samir', 'Girón', 'Grau', '376538976', 'samirG@gmail.com', 1, '1234');
 INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Juan', 'Garcia', 'Rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
+
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Carlos', 'Jimenez', 'Paredes', '376538976', 'carlosJP@gmail.com', 1, '1234','danny.png');
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Juan', 'garcia', 'rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Juan', 'garcia', 'rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Juan', 'garcia', 'rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Juan', 'garcia', 'rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Juan', 'garcia', 'rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
+VALUES ('32673315S','Juan', 'garcia', 'rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
+INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd, img)
 VALUES ('32673315S','Juan', 'garcia', 'rodriguez', '376538976', 'samirG@gmail.com', 1, '1234','danny.png');
 --Admin
 INSERT INTO tbl_admin (nombre_admin, apellido_admin, email_admin, telf_admin, passwd)

@@ -63,15 +63,62 @@ body {
   position: relative;
   top: 2%;
 }
+.filters {
+  display: flex;
+  justify-content: flex-end;
+}
+.filters span {
+  width: auto;
+  height: 5vh;
+  margin: 1%;
+}
+.filters .csv {
+  margin-right: 25%;
+}
+.inputsFiltro {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.inputsFiltro button {
+  margin: 1%;
+  margin-right: 3%;
+}
+.inputsFiltro input {
+  width: 150%;
+}
+.inputsFiltro2 {
+  width: 100%;
+  padding-right: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inputsFiltro2 button {
+  margin: 1%;
+  margin-right: 3%;
+}
+.inputsFiltro2 input {
+  width: 150%;
+}
+.botonesFiltro {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
 .tabla {
   margin-left: 5%;
   width: 90%;
   position: relative;
-  top: 15%;
+  top: 10%;
   height: 40vh;
 }
 .tabla .acc {
   padding-left: 5%;
+}
+.checkbox {
+  width: 2%;
 }
 .nombre {
   width: 25%;
@@ -87,6 +134,9 @@ body {
 }
 .curso {
   width: 10%;
+}
+.curso2 {
+  width: 15%;
 }
 .acciones {
   width: 100%;
@@ -106,4 +156,12 @@ body {
   height: 25px;
   width: 25px;
   color: #ab4452;
+}
+.acciones2 {
+  width: 100%;
+  display: flex;
+}
+.acciones2 span .svg1 {
+  height: 30px;
+  width: 30px;
 }

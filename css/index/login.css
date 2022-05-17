@@ -6,9 +6,9 @@ body {
     line-height: 1.7;
     color: #c4c3ca;
     overflow-x: hidden;
-    background: linear-gradient(-45deg, #02ec9e, #00849e);
+    background: linear-gradient(-45deg, #02ec9e, #00849e, #d814b7);
     background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    animation: gradient 1s ease infinite;
 }
 
 

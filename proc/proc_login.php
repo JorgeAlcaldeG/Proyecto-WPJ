@@ -42,7 +42,7 @@
                     $_SESSION['id'] = $datos['id_admin'];
                     $_SESSION['nom'] = $datos['nombre_admin'];
                     $_SESSION['email'] = $datos['email_admin'];
-                    echo "<script> window.location.href='./../pantallas/test.php'</script>";
+                    echo "<script> window.location.href='./../pantallas/CrudAdministradoresAlu.php'</script>";
                 }else {
                     //Procederemos a hacer una consulta que buscara el correo del usuario
                     $sesion = "SELECT * from tbl_alumne WHERE email_alu='$email' and passwd='$pwd';";
@@ -72,11 +72,14 @@
                         $datos = mysqli_fetch_assoc($resultado);
                         //SI SI EXISTE una fila, quiere decir QUE SI ESTA EL CORREO EN LA BASE DE DATOS
                         if($contador == 1) {
+                            echo 'buenas tardes';
                             $_SESSION['session'] = 2;
                             $_SESSION['id'] = $datos['id_professor'];
                             $_SESSION['nom'] = $datos['nom_prof'];
                             $_SESSION['email'] = $datos['email_prof'];        
-                            echo "<script> window.location.href='./../pantallas/test.php'</script>";
+                            echo "<script> window.location.href='./../pantallas/CrudAdministradoresAlu.php'</script>";
+                        }else {
+                            echo "<script> window.location.href='./../index.php?msg=1'</script>";   
                         }
                     }
                 }
