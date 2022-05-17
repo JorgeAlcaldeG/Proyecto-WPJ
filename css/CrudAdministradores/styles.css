@@ -1,0 +1,48 @@
+body {
+  display: flex ;
+  margin: 0%;
+}
+.nav {
+  width: 10%;
+  height: 100vh;
+  background-color: #434a54;
+  display: flex;
+  flex-direction: column;
+}
+.nav a {
+  position: relative;
+  top: 800%;
+  text-decoration: none;
+  font-style: Bahnschrift;
+  font-weight: Regular;
+  font-size: 20px;
+  color: #ffffff;
+}
+.nav span {
+  margin-top: 10%;
+}
+.nav .spanAlumnos {
+  background-color: #E7E7E7;
+}
+.box {
+  width: 100%;
+  height: 100vh;
+}
+.cabecera {
+  height: 7vh;
+  background-color: white;
+  border-bottom: solid 1px #434a54;
+  display: flex;
+  align-items: center;
+}
+.cabecera h2 {
+  font-style: Tahoma;
+  font-weight: Bold;
+  font-size: 25px;
+  position: relative;
+  left: 5%;
+}
+.pagina {
+  height: 93vh;
+  background-color: #E7E7E7;
+}
