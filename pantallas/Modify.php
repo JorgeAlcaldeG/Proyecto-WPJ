@@ -18,14 +18,12 @@
     // $sqlcurso = "SELECT id_classe, codi_classe FROM tbl_classe";
     // $result = mysqli_query($connection, $sql);
     // $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    if($typeuser==0){
+    if($typeuser=="alu"){
         modifyAlu($id);
     }
-    if($typeuser==1){
+    if($typeuser=="prof"){
         modifyProf($id);
     }
-    ?>
-<?php
     if(isset($_GET['msg'])){
                 echo'<p>Sube una imagen con el siguiente formato: jpg, gif o png</p>';     
             }

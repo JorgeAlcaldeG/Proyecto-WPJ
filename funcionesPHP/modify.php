@@ -23,7 +23,7 @@ function modifyAlu($id){
     echo"</select>
     <input type='file' name='foto' placeholder='Foto'>
     <input type='hidden' name='id' value='".$_GET['var']."'>
-    <input type='hidden' name='typeuser' value='0'>
+    <input type='hidden' name='typeuser' value='alu'>
     <input type='submit' value='Modificar'>
 </form>";
 }
@@ -50,7 +50,7 @@ function modifyProf($id){
     echo"</select>
     <input type='file' name='foto' placeholder='Foto'>
     <input type='hidden' name='id' value='".$_GET['var']."'>
-    <input type='hidden' name='typeuser' value='1'>
+    <input type='hidden' name='typeuser' value='prof'>
     <input type='submit' value='Modificar'>
 </form>";  
 }

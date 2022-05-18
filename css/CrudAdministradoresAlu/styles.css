@@ -2,10 +2,30 @@ body {
   display: flex ;
   margin: 0%;
 }
+button a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.form:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+.btn:active,
+.btn:focus {
+  background-color: #000000;
+  color: #ffffff;
+  box-shadow: 0 8px 24px 0 rgba(112, 16, 16, 0.2);
+}
+.btn a:hover {
+  background-color: #1b9237;
+  color: #ffffff;
+  text-decoration: none;
+}
 .nav {
   width: 10%;
   height: 100vh;
   background-color: #434a54;
+  position: fixed;
   display: flex;
   flex-direction: column;
 }
@@ -38,6 +58,7 @@ body {
   height: 100vh;
 }
 .cabecera {
+  padding-left: 10%;
   height: 7vh;
   background-color: white;
   border-bottom: solid 1px #434a54;
@@ -52,6 +73,7 @@ body {
   left: 5%;
 }
 .pagina {
+  padding-left: 10%;
   height: 93vh;
   background-color: #E7E7E7;
 }
@@ -85,9 +107,6 @@ body {
   margin: 1%;
   margin-right: 3%;
 }
-.inputsFiltro input {
-  width: 150%;
-}
 .inputsFiltro2 {
   width: 100%;
   padding-right: 10%;
@@ -116,6 +135,9 @@ body {
 }
 .tabla .acc {
   padding-left: 5%;
+}
+.tabla .cabeceraTabla {
+  position: fixed;
 }
 .checkbox {
   width: 2%;
@@ -164,4 +186,11 @@ body {
 .acciones2 span .svg1 {
   height: 30px;
   width: 30px;
+}
+.pages {
+  padding-top: 2%;
+}
+.pages a {
+  text-decoration: none;
+  color: black;
 }

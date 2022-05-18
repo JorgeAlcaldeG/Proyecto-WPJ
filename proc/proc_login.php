@@ -45,7 +45,7 @@
                     echo "<script> window.location.href='./../pantallas/CrudAdministradoresAlu.php'</script>";
                 }else {
                     //Procederemos a hacer una consulta que buscara el correo del usuario
-                    $sesion = "SELECT * from tbl_alumne WHERE email_alu='$email' and passwd='$pwd';";
+                    $sesion = "SELECT * from tbl_professor WHERE email_prof='$email' and passwd='$pwd';";
                     //Realizamos la consulta y anadimos $connection, ya que es la variable que creamos en nuestro archivo connection.php    
                     $resultado = $connection->query($sesion);
                     
@@ -56,12 +56,14 @@
                     $datos = mysqli_fetch_assoc($resultado);
                     //SI SI EXISTE una fila, quiere decir QUE SI ESTA EL CORREO EN LA BASE DE DATOS
                     if($contador == 1) {
-                        $_SESSION['session'] = 1;
-                        $_SESSION['nom'] = $datos['nom_alu'];
-                        echo "<script> window.location.href='./alumn.php'</script>";
+                        $_SESSION['session'] = 2;
+                        $_SESSION['id'] = $datos['id_professor'];
+                        $_SESSION['nom'] = $datos['nom_prof'];
+                        $_SESSION['email'] = $datos['email_prof'];
+                        echo "<script> window.location.href='./../pantallas/CrudAdministradoresAlu.php'</script>";
                     }else {
                         //Procederemos a hacer una consulta que buscara el correo del usuario
-                        $sesion = "SELECT * from tbl_professor WHERE email_prof='$email' and passwd='$pwd';";
+                        $sesion = "SELECT * from tbl_alumne WHERE email_alu='$email' and passwd='$pwd';";
                         //Realizamos la consulta y anadimos $connection, ya que es la variable que creamos en nuestro archivo connection.php    
                         $resultado = $connection->query($sesion);
                         
@@ -73,11 +75,9 @@
                         //SI SI EXISTE una fila, quiere decir QUE SI ESTA EL CORREO EN LA BASE DE DATOS
                         if($contador == 1) {
                             echo 'buenas tardes';
-                            $_SESSION['session'] = 2;
-                            $_SESSION['id'] = $datos['id_professor'];
-                            $_SESSION['nom'] = $datos['nom_prof'];
-                            $_SESSION['email'] = $datos['email_prof'];        
-                            echo "<script> window.location.href='./../pantallas/CrudAdministradoresAlu.php'</script>";
+                            $_SESSION['session'] = 1;
+                            $_SESSION['nom'] = $datos['nom_alu'];
+                            echo "<script> window.location.href='./alumn.php'</script>";
                         }else {
                             echo "<script> window.location.href='./../index.php?msg=1'</script>";   
                         }

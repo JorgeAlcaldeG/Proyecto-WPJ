@@ -2,11 +2,32 @@ body{
     display: flex ;
     margin: 0%;
 }
+button a{
+    text-decoration: none;
+    color: #ffffff;
 
+}
+.form:hover {
+    color: #ffffff;
+    text-decoration:none;
+}
+.btn:active,
+.btn:focus {
+    background-color: #000000;
+    color: #ffffff;
+    box-shadow: 0 8px 24px 0 rgba(112, 16, 16, 0.2);
+}
+
+.btn a:hover {
+    background-color: rgb(27, 146, 55);
+    color: #ffffff;
+    text-decoration: none;
+}
 .nav{
     width: 10%;
     height: 100vh;
     background-color:#434a54 ;
+    position: fixed;
     display: flex;
     flex-direction: column;
     a{
@@ -48,6 +69,7 @@ body{
     // background-color: red;
 }
 .cabecera{
+    padding-left: 10%;
     height: 7vh;
     background-color: white;
     border-bottom: solid 1px #434a54;
@@ -68,6 +90,8 @@ body{
 .pagina{
     // display: flex;
     // justify-content: center;
+    padding-left: 10%;
+    
     height:93vh;
     background-color: #E7E7E7;
     .h3{
@@ -106,9 +130,9 @@ body{
         margin: 1%;
         margin-right: 3%;    
     }
-    input{
-        width: 150%;
-    }
+    
+     
+    
 }
 .inputsFiltro2{
     width: 100%;
@@ -130,6 +154,8 @@ body{
     justify-content: flex-end;
 }
 .tabla{
+    // overflow: auto;
+    // overflow-x: hidden;
     margin-left: 5%;
     width: 90%;
     position: relative;
@@ -140,6 +166,10 @@ body{
     }
     .acc2{
         // padding-left: 5%;
+    }
+    .cabeceraTabla{
+        position: fixed;
+        
     }
 }
 .checkbox{
@@ -207,4 +237,11 @@ body{
         
     }
    
+}
+.pages{
+    padding-top: 2%;
+    a{
+        text-decoration: none;
+        color: black;
+    }
 }

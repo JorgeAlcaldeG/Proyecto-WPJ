@@ -8,7 +8,7 @@ function perfilAlu($id){
     $ruta="../img/alumnos/";
     echo"</br>";
     foreach($query as $datos){
-        $rutacompleta=$ruta.$datos["img"];
+        $rutacompleta=$ruta.$datos["img_alu"];
         echo'<div class="row">
             <div class="column-2-foto">';
                 echo "<img id='profilePic' src='$rutacompleta' alt='' srcset=''>";  
@@ -49,10 +49,10 @@ function perfilProf($id){
     include '../proc/conexion.php';
     $sql="SELECT * FROM tbl_professor where id_professor={$id}";
     $query=mysqli_query($connection,$sql);
-    $ruta=$_SERVER['SERVER_NAME']."/www/dominiohttp1/img/profesores/";
+    $ruta="../img/profesores/";
     echo"</br>";
     foreach($query as $datos){
-        $rutacompleta="http://".$ruta.$datos["img"];
+        $rutacompleta=$ruta.$datos["img_prof"];
         echo'<div class="row">
             <div class="column-2-foto">';
                 echo "<img id='profilePic' src='$rutacompleta' alt='' srcset=''>";  

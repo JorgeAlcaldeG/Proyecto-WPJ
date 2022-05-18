@@ -61,6 +61,9 @@ ALTER TABLE tbl_professor
 MODIFY passwd varchar(60) NOT NULL;
 
 ALTER TABLE tbl_alumne
+RENAME COLUMN img TO img_alumne;
+
+ALTER TABLE tbl_alumne
 MODIFY passwd varchar(60) NOT NULL;
 
 ALTER TABLE tbl_alumne

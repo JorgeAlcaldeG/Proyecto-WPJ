@@ -41,7 +41,7 @@
 
     <?php
         //perfilProf($_GET["var"]);
-        if($_GET["typeuser"]==1){
+        if($_GET["typeuser"]=="alu"){
             perfilAlu($_GET["var"]);
         }else{
             perfilProf($_GET["var"]);
