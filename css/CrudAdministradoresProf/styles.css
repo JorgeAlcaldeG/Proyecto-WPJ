@@ -2,6 +2,13 @@ body {
   display: flex ;
   margin: 0%;
 }
+a {
+  text-decoration: none;
+}
+#btn {
+  text-decoration: none;
+  color: #fff;
+}
 .nav {
   width: 10%;
   height: 100vh;
@@ -32,6 +39,9 @@ body {
   position: relative;
   top: 28%;
   padding-left: 10%;
+}
+button a {
+  text-decoration: none;
 }
 .box {
   width: 100%;

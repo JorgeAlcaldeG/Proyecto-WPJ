@@ -74,10 +74,9 @@
                         $datos = mysqli_fetch_assoc($resultado);
                         //SI SI EXISTE una fila, quiere decir QUE SI ESTA EL CORREO EN LA BASE DE DATOS
                         if($contador == 1) {
-                            echo 'buenas tardes';
                             $_SESSION['session'] = 1;
                             $_SESSION['nom'] = $datos['nom_alu'];
-                            echo "<script> window.location.href='./alumn.php'</script>";
+                            echo "<script> window.location.href='./alumn.php'</script>";   
                         }else {
                             echo "<script> window.location.href='./../index.php?msg=1'</script>";   
                         }

@@ -49,37 +49,67 @@
     <span class="h3">Filters</span>
         <div class="filters">
         <?php 
-        
+            // SESSION Y CONEXION A LA BD
              session_start();
-            // CONSULTAS PARA MOSTRAR LOS FILTROS
              include "../proc/conexion.php";
              $sql="SELECT nom_prof, cognom1_prof, cognom2_prof FROM tbl_professor ";
              $profesores = mysqli_query($connection, $sql); 
 
+             if(!isset($_GET['curso']) || (isset($_GET['curso']) && $_GET['curso']=="todos")){
+              
+              $curso="%";
              
+            }else{
+              $curso=$_GET['curso'];
 
+             }
+            //  echo $curso;    
+             if (!isset($_GET['tut'])) {
+              $tut="1=1";
+             }else {
+              $tut=$_GET['tut'] ;
+             }
+            
 
-
-              // CABECERAS
+            //CABECERA FILTROS SEGUN LA SESSION QUE INCIAS
+            $cursoActive= explode("-",$curso);
+            if ($cursoActive[0]=="%") {
+              $cursoActive[0]="TODOS";
+            }
+            // print_r( $cursoActive);
+            
              if ($_SESSION['session']==3) {
                $cabecera= <<<wxt
                <div class="inputsFiltro"><button>filters</button>
                <form action="../proc/filtros.php"  method='post'>
-                 <select name="curso" id="select_curso">
-                 <option value=""></option>
-                 <option value="ASIX1-2122">ASIX1</option>
-                 <option value="ASIX2-2122">ASIX2</option>
-                 </select>
-                 <select name="curso" id="select_curso">
+               <div class="cursos">
+               wxt;
+              
+               $cabecera2= <<<wxt
+               </div>
                  <input type="text" name="search">
                  <input type="submit">
                </form></div>
                <div class="botonesFiltro">
-               <span> <button class="btn btn-success"><a href="./form.php".?typeuser=alu>Crear Nuevo Registro</a></button></span>
+               <span> <button class="btn btn-success"><a href="./form.php?typeuser=alu" >Crear Nuevo Registro</a></button></span>
                <span class="csv"> <button onclick="window.location.href='../proc/save_csv.php'" class="btn btn-warning ">CSV</button></span>
                </div>  
                wxt;
                echo $cabecera;
+               $sql="SELECT * FROM tbl_classe";
+               $classes=mysqli_query($connection, $sql);
+               foreach ($classes as $classe => $datos) {
+                // print_r($datos);
+                $nom=explode("-",$datos['codi_classe']);
+               echo " <label for='curos'>{$nom[0]}</label>";
+               if ($curso===$datos['codi_classe']) {
+                 echo"si";
+                echo "<input type='checkbox' name='curso' value='{$datos['codi_classe']}' checked>";
+               }else{
+                echo "<input type='checkbox' name='curso' value='{$datos['codi_classe']}'>";
+              }
+            } 
+               echo $cabecera2;
              }elseif (isset($_SESSION['session']) && $_SESSION['session']==2) {
                $cabecera= <<<wxt
                <div class="inputsFiltro2"><button>filters</button>
@@ -92,40 +122,50 @@
              }else{
                echo "<script>window.location.href='index.php'</script>";
              }
-             ?>
-      </div>
+             
+
+
+      echo "</div>";
         
 
 
-      <?php
-      
-      $curso=$_GET['curso'];
-      //cantidad de registros por página
-      $cantidad = 10 ;
-      $Pagina=1; 
-      //Saber si estamos en la página 1 u en otra
-      if (empty($_GET["pag"])) {
-        $limit = 0;
-        $Pagina=1;
 
-      }
-      else {
-        $limit = ($_GET["pag"]-1)*$cantidad;
-        $Pagina =($_GET["pag"]);
-      }
-  
-      
-      $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor where c.codi_classe='{$curso}'";
-      $registrosTotal = mysqli_query($connection, $sql);
-      //mysqli_num_rows = cantidad de registros que me devuelve
-      $numRegistros = mysqli_num_rows($registrosTotal);
+      // VARIABLES PARA FILTROS RECOGIDAS DESDE URL
+
+    
+
+      // PAGINACION
+
+          //cantidad de registros por página
+          $cantidad = 10 ;
+          $Pagina=1; 
+          //Saber si estamos en la página 1 u en otra
+          if (empty($_GET["pag"])) {
+            $limit = 0;
+            $Pagina=1;
+
+          }
+          else {
+            $limit = ($_GET["pag"]-1)*$cantidad;
+            $Pagina =($_GET["pag"]);
+          }
+        // echo $curso;
+          print_r("SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor  where c.codi_classe like '{$curso}' and p.id_professor = '{$tut}'");
+        $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor  where c.codi_classe like '{$curso}' and p.id_professor = '{$tut}'";
+        $registrosTotal = mysqli_query($connection, $sql);
+        //mysqli_num_rows = cantidad de registros que me devuelve
+        $numRegistros = mysqli_num_rows($registrosTotal);
+        
       
 
-//Saber la cantidad de páginas según la cantidad de registros por página
+    //Saber la cantidad de páginas según la cantidad de registros por página
     $numPaginas = ceil($numRegistros/$cantidad);
     // echo $numRegistros;
       
         
+
+
+  // CABECERAS DE LA TABLA PARA ADMINISTRADORES
         // echo "<br>";
         $tablaAdmin="
         <div class='tabla'>
@@ -147,7 +187,7 @@
        <form action='' method='post'>";
      
 
-
+  // CABECERAS DE LA TABLA PARA PROFESORES
         $tablaProf="
         <div class='tabla'>
     <table class='table align-middle mb-0 bg-white'>
@@ -160,7 +200,13 @@
         <th class='acc2'>Acciones</th>
       </tr>";
 
-      $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor where c.codi_classe='{$curso}'LIMIT $limit, $cantidad ";
+
+
+
+
+      // CONSULTA QUE MUESTRA LOS DATOS EN LA TABLA LIMIT Y CANTIDAD PARA LA PAGINACION WHERES PARA LOS FILTROS
+
+      $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor where c.codi_classe like '{$curso}' and p.id_professor =' {$tut} ' LIMIT $limit, $cantidad ";
       $registros = mysqli_query($connection, $sql);
         foreach ($registros as $registro => $dato) {
             // var_dump($dato);
@@ -173,7 +219,8 @@
             // echo $ruta;
             // echo $dato['img'];
         
-    
+
+  // FILA ADMINISTRADORES
    $filaAdmin=<<<wxt
     <tr>
     <td class="checkbox">   <input type="checkbox" name="{$dato['id_alumne']}" value="{$dato['id_alumne']}" id="">
@@ -325,6 +372,7 @@ $tablaProf = $tablaProf.$filaProf;
 $final =<<<wxt
 </body>
 </table>
+
 </form>
    
 
@@ -361,7 +409,7 @@ onclick=back({$Pagina},{$numPaginas})>Back</button>";
 echo $buttonBack;
 echo "</div>";
 ?>
-
+<span class="csv"> <button onclick="window.location.href='../pantallas/form_mail.php'" class="btn btn-warning ">Enviar correo</button></span>
 </div>
     </div>
    

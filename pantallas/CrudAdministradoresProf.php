@@ -55,8 +55,8 @@
                   <input type="text">
                 </form></div>
                 <div class="botonesFiltro">
-                <span> <button class="btn btn-success">Crear Nuevo Registro</button></span>
-                <span class="csv"> <button class="btn btn-warning ">CSV</button></span>
+                <span> <button class="btn btn-success"><a id="btn" href="./form.php?typeuser=prof" >Crear Nuevo Registro</a></button></span>
+                <span class="csv"> <button onclick="window.location.href='../proc/save_csv.php'" class="btn btn-warning ">CSV</button></span>
                 </div>  
                 wxt;
                 echo $cabecera;
@@ -118,7 +118,7 @@
           </tr>
           </thead>
           <tbody>
-          <form action='' method='post'>";
+          <form action='../pantallas/form_mail.php' method='post'>";
           $tablaProf="
           <div class='tabla'>
           <table class='table align-middle mb-0 bg-white'>
@@ -285,6 +285,7 @@ $tablaProf = $tablaProf.$filaProf;
 $final =<<<wxt
 </body>
 </table>
+<button type="submit">Enviar correos</button>
 </form>
 wxt;
 $tablaAdmin=$tablaAdmin.$final;
@@ -306,7 +307,6 @@ onclick=back({$Pagina},{$numPaginas})>Back</button>";
 echo $buttonBack;
 
 ?>
-
 </div>
     </div>
    

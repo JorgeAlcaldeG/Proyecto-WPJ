@@ -3,6 +3,8 @@ html {
 }
 
 body {
+    overflow: hidden;
+    /* Hide scrollbars */
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -28,10 +30,10 @@ body {
 
 .login-box {
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 50%;
-    width: 600px;
-    padding: 40px;
+    width: 450px;
+    padding: 20px;
     transform: translate(-50%, -50%);
     background: #2d3238;
     box-sizing: border-box;
@@ -60,8 +62,13 @@ body {
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.ax {
+    margin-bottom: -10px;
+}
+
 select {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    padding: 2PX;
 }
 
 .login-box h2 {
@@ -87,6 +94,10 @@ select {
     background: transparent;
 }
 
+option {
+    color: #000000;
+}
+
 .login-box .user-box label {
     position: absolute;
     top: 0;
@@ -107,7 +118,7 @@ select {
 }
 
 .aux {
-    margin-bottom: 30px;
+    margin-bottom: px;
 }
 
 .login-box form a {
@@ -179,4 +190,32 @@ select {
     color: #0e90ab;
     font-size: 12px;
     margin: 5px;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
