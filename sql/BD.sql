@@ -110,6 +110,9 @@ INSERT INTO tbl_classe (codi_classe, nom_classe, tutor)
 VALUES ('ASIX1-2122', 'ASIX1 curso 2021/2022', 1);
 INSERT INTO tbl_classe (codi_classe, nom_classe, tutor)
 VALUES ('ASIX2-2122', 'ASIX2 curso 2021/2022', 1);
+
+INSERT INTO tbl_classe (codi_classe, nom_classe, tutor)
+VALUES ('DAW1-2122', 'DAW1 curso 2021/2022', 5);
 --ALUMNOS
 INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd)
 VALUES ('32673315S','Samir', 'Girón', 'Grau', '376538976', 'samirG@gmail.com', 1, '1234');

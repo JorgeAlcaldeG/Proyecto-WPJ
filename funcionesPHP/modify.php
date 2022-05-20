@@ -33,7 +33,7 @@ function modifyAlu($id){
     </div>
     <div class='user-box'>
     <p class='active'>Curso</p>
-    <select class='form-select bg-transparent border-0 text-white border-bottom border-warning' aria-label='asd'>";
+    <select name='curso' class='form-select bg-transparent border-0 text-white border-bottom border-warning' >";
             $option = mysqli_query($connection, $sqlcurso);
             foreach($option as $curso){
                 echo "<option value='{$curso["id_classe"]}'>{$curso["codi_classe"]}</option>";
@@ -80,7 +80,7 @@ function modifyProf($id){
     </div>
     <div class='user-box'>
     <p class='active'>Curso</p>
-    <select class='form-select bg-transparent border-0 text-white border-bottom border-warning' aria-label='asd'>";
+    <select name='curso' class='form-select bg-transparent border-0 text-white border-bottom border-warning'>";
             $option = mysqli_query($connection, $sqlcurso);
             foreach($option as $curso){
                 echo "<option value='{$curso["id_dept"]}'>{$curso["nom_dept"]}</option>";
@@ -92,7 +92,7 @@ function modifyProf($id){
     <br>
     <br>
     <input type='hidden' name='id' value='".$_GET['var']."'>
-    <input type='hidden' name='typeuser' value='alu'>
+    <input type='hidden' name='typeuser' value='prof'>
     <input type='submit' value='Modificar' class='btn'>
 </form>";
 }

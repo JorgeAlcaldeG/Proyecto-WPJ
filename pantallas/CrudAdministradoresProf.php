@@ -118,7 +118,7 @@
           </tr>
           </thead>
           <tbody>
-          <form action='../pantallas/form_mail.php' method='post'>";
+          <form action='../pantallas/form_mail.php?var=prof' method='post'>";
           $tablaProf="
           <div class='tabla'>
           <table class='table align-middle mb-0 bg-white'>
@@ -305,7 +305,12 @@ echo $buttonNext;
 $buttonBack="<button
 onclick=back({$Pagina},{$numPaginas})>Back</button>";
 echo $buttonBack;
-
+if(isset($_GET["msg"])){
+  echo"<p>ERROR: Elige una direccion de Email para enviar correos</p>";
+}
+if(isset($_GET["msg2"])){
+  echo"<p>ERROR: Tienes que indicar asunto y mensaje del correo</p>";
+}
 ?>
 </div>
     </div>

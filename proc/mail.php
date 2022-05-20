@@ -5,10 +5,14 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
-
+$asunto = $_POST["asunto"];
+$mensaje = $_POST["mensaje"];
+$num = $_POST["numcorreo"];
+if(empty($asunto) || empty($mensaje) || empty($num)){
+    header("Location: ../pantallas/form_mail.php?msg=error&var={$_GET["var"]}");
+}
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-
 try {
     //Server settings
     $mail->SMTPDebug = 0;                      //Enable verbose debug output
@@ -22,7 +26,10 @@ try {
 
     //Recipients
     $mail->setFrom('phpmailerproyectoj23@gmail.com', 'Administradores');
-    $mail->addAddress('phpmailerproyectoj23@gmail.com');     //Add a recipient
+    $mail->addAddress('jorge-2806@hotma.ca');
+    // for ($i=0; $i<$num; $i++){
+    //     $mail->addAddress($_POST[$i]);     //Add a recipient
+    // }
     // $mail->addAddress('ellen@example.com');               //Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');
@@ -34,9 +41,9 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = $asunto;
+    $mail->Body    = $mensaje;
+    $mail->AltBody = $mensaje;
 
     $mail->send();
     echo 'Message has been sent';

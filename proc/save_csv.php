@@ -15,24 +15,10 @@ require 'conexion.php';
     }
     $fileAlu="./csv/ListaUsuarios.csv";
     
-    // if (file_exists($fileAlu)) {
-    //     header('Content-Description: File Transfer');
-    //     header('Content-Type: application/octet-stream');
-    //     header('Content-Disposition: attachment; filename="'.basename($fileAlu).'"');
-    //     header('Expires: 0');
-    //     header('Cache-Control: must-revalidate');
-    //     header('Pragma: public');
-    //     header('Content-Length: ' . filesize($fileAlu));
-    //     readfile($fileAlu);
-    // }
-
     // Sección de profes
     $sql2="SELECT p.nom_prof, p.cognom1_prof, p.cognom2_prof, email_prof, d.codi_dept FROM tbl_professor p INNER JOIN tbl_dept d ON p.dept = d.id_dept";
     $listaUser=mysqli_query($connection,$sql2);
     
-    // if(!file_exists("ListaUsuarios.csv")){
-    //     file_put_contents("./csv/ListaUsuarios.csv","Nombre;Apellido1;Apellido2;Email;Pass;dept \n");
-    // }
     foreach ($listaUser as $user){
         file_put_contents("./csv/ListaUsuarios.csv","{$user['nom_prof']};{$user['cognom1_prof']};{$user['cognom2_prof']};{$user['email_prof']};{$user['codi_dept']};$ouProf;end \n",FILE_APPEND);
     }

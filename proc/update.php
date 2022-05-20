@@ -1,7 +1,5 @@
 <?php
 include '../proc/conexion.php';
-// echo $_POST['typeuser'];
-// die();
 if($_POST['typeuser']=="alu"){
     $nombre = $_POST['nombre'];
     $apellido1 = $_POST['apellido1'];
@@ -45,11 +43,12 @@ if($_POST['typeuser']=="alu"){
     $curso = $_POST['curso'];
     $destino='../img/profesores/'.$nombre.substr($foto['name'], -4);
     $nombrefichero=$nombre.substr($foto['name'], -4);
+    var_dump($foto);
     if($foto["size"]==0){
         $sql="UPDATE `tbl_professor` SET `nom_prof` = '$nombre', `cognom1_prof` = '$apellido1', `cognom2_prof` = '$apellido2',`telf`='$telefono', `email_prof`='$correo', `img_prof`='$nombrefichero', `dept`='$curso' WHERE `tbl_professor`.`id_professor` = $id";
         $listalumnos=mysqli_query($connection,$sql); 
     }else{
-        if(($foto['size']<100000) && ($foto['type']=="image/jpeg" || $foto['type']=="image/png" || $foto['type']=="image/gif")){
+        if(($foto['size']<200*2024) && ($foto['type']=="image/jpeg" || $foto['type']=="image/png" || $foto['type']=="image/gif")){
             $exito=move_uploaded_file($foto['tmp_name'], $destino);
             if($exito){
                 $sql="UPDATE `tbl_professor` SET `nom_prof` = '$nombre', `cognom1_prof` = '$apellido1', `cognom2_prof` = '$apellido2',`telf`='$telefono', `email_prof`='$correo', `dept`='$curso', `img_prof`='$nombrefichero' WHERE `tbl_professor`.`id_professor` = $id";

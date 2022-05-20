@@ -23,27 +23,25 @@
         $EST = 0;
         if ($_GET['typeuser'] == 'alu' ) {
             $EST = 1;
-            $sqlcurso = "SELECT id_classe, codi_classe FROM tbl_classe";
             echo "<h2>Registro Alumno</h2>";
             // redireccionamiento a la pagina inicio
         }else
         echo "<h2>Registro Profesor</h2>";
-        $sqlcurso = "SELECT id_dept, nom_dept FROM tbl_dept";
 
         // $_GET['typeuser']=alu
         // $_GET['typeuser']=prof
         ?>
-        <form action="./../proc/proc_insert.php" method="post">
+        <form action="./../proc/proc_insert.php" method="post" enctype="multipart/form-data">
             <div class="user-box">
-                <input type="text" name="nom" required="">
+                <input type="text" name="nom" required>
                 <label>Nombre</label>
             </div>
             <div class="user-box">
-                <input type="text" name="apellido" required="">
+                <input type="text" name="apellido" required>
                 <label>Primer Apellido</label>
             </div>
             <div class="user-box">
-                <input type="text" name="apellido2" required="">
+                <input type="text" name="apellido2" required>
                 <label>Segundo Apellido</label>
             </div>
             <?php
@@ -56,14 +54,16 @@
             <div class="user-box">
                 <p class="active">Curso</p>
                 <div class="user-box">
-                <select class="form-select bg-transparent border-0 text-white border-bottom border-warning">
+                <select class="form-select bg-transparent border-0 text-white border-bottom border-warning" name='curso'>
                     <?php
                     if($EST == 1){
+                        $sqlcurso = "SELECT id_classe, codi_classe FROM tbl_classe;";
                         $option = mysqli_query($connection, $sqlcurso);
                         foreach($option as $curso){
-                        echo "<option name='curso' value='{$curso["id_classe"]}'>{$curso["codi_classe"]}</option>";
+                        echo "<option  value='{$curso['id_classe']}'>{$curso['codi_classe']}</option>";
                         }
                     }else {
+                        $sqlcurso = "SELECT id_dept, nom_dept FROM tbl_dept;";
                         $option = mysqli_query($connection, $sqlcurso);
                         foreach($option as $curso){
                             echo "<option value='{$curso["id_dept"]}'>{$curso["nom_dept"]}</option>";
@@ -73,19 +73,19 @@
                 </select>
             </div>
             <div class="user-box">
-                <input type="number" name="telf" required="">
+                <input type="number" name="telf" required>
                 <label>Telefono</label>
             </div>
             <div class="user-box">
-                <input type="email" name="mail" required="">
+                <input type="email" name="mail" required>
                 <label>Correo / Email </label>
             </div>
             <div class="user-box">
                 <p class="active">Foto</p>
-                <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto">
+                <input class="form-control form-control-sm" type="file"  name='foto'>
             </div>
-    </div>
-    <input type="submit" value="Registrar" class="btn">
+        </div>
+        <input type="submit" value="Registrar" class="btn">
         </form>
     
     <!-- partial -->

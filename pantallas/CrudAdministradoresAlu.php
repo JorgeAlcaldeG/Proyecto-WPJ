@@ -52,73 +52,13 @@
             // SESSION Y CONEXION A LA BD
              session_start();
              include "../proc/conexion.php";
-             $sql="SELECT nom_prof, cognom1_prof, cognom2_prof FROM tbl_professor ";
-             $profesores = mysqli_query($connection, $sql); 
-
-             if(!isset($_GET['curso']) || (isset($_GET['curso']) && $_GET['curso']=="todos")){
-              
-              $curso="%";
-             
-            }else{
-              $curso=$_GET['curso'];
-
-             }
-            //  echo $curso;    
-             if (!isset($_GET['tut'])) {
-              $tut="1=1";
-             }else {
-              $tut=$_GET['tut'] ;
-             }
             
-
-            //CABECERA FILTROS SEGUN LA SESSION QUE INCIAS
-            $cursoActive= explode("-",$curso);
-            if ($cursoActive[0]=="%") {
-              $cursoActive[0]="TODOS";
-            }
-            // print_r( $cursoActive);
             
              if ($_SESSION['session']==3) {
-               $cabecera= <<<wxt
-               <div class="inputsFiltro"><button>filters</button>
-               <form action="../proc/filtros.php"  method='post'>
-               <div class="cursos">
-               wxt;
-              
-               $cabecera2= <<<wxt
-               </div>
-                 <input type="text" name="search">
-                 <input type="submit">
-               </form></div>
-               <div class="botonesFiltro">
-               <span> <button class="btn btn-success"><a href="./form.php?typeuser=alu" >Crear Nuevo Registro</a></button></span>
-               <span class="csv"> <button onclick="window.location.href='../proc/save_csv.php'" class="btn btn-warning ">CSV</button></span>
-               </div>  
-               wxt;
-               echo $cabecera;
-               $sql="SELECT * FROM tbl_classe";
-               $classes=mysqli_query($connection, $sql);
-               foreach ($classes as $classe => $datos) {
-                // print_r($datos);
-                $nom=explode("-",$datos['codi_classe']);
-               echo " <label for='curos'>{$nom[0]}</label>";
-               if ($curso===$datos['codi_classe']) {
-                 echo"si";
-                echo "<input type='checkbox' name='curso' value='{$datos['codi_classe']}' checked>";
-               }else{
-                echo "<input type='checkbox' name='curso' value='{$datos['codi_classe']}'>";
-              }
-            } 
-               echo $cabecera2;
+              include "../proc/filtrosAdmin.php";
+            
              }elseif (isset($_SESSION['session']) && $_SESSION['session']==2) {
-               $cabecera= <<<wxt
-               <div class="inputsFiltro2"><button>filters</button>
-               <form action="">
-                 <input type="text">
-               </form></div>
-       
-               wxt;
-               echo $cabecera;
+               include "../proc/filtorsProf.php";
              }else{
                echo "<script>window.location.href='index.php'</script>";
              }
@@ -129,38 +69,37 @@
         
 
 
-
       // VARIABLES PARA FILTROS RECOGIDAS DESDE URL
 
     
 
-      // PAGINACION
+    //   // PAGINACION
 
-          //cantidad de registros por página
-          $cantidad = 10 ;
-          $Pagina=1; 
-          //Saber si estamos en la página 1 u en otra
-          if (empty($_GET["pag"])) {
-            $limit = 0;
-            $Pagina=1;
+    //       //cantidad de registros por página
+    //       $cantidad = 10 ;
+    //       $Pagina=1; 
+    //       //Saber si estamos en la página 1 u en otra
+    //       if (empty($_GET["pag"])) {
+    //         $limit = 0;
+    //         $Pagina=1;
 
-          }
-          else {
-            $limit = ($_GET["pag"]-1)*$cantidad;
-            $Pagina =($_GET["pag"]);
-          }
-        // echo $curso;
-          print_r("SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor  where c.codi_classe like '{$curso}' and p.id_professor = '{$tut}'");
-        $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor  where c.codi_classe like '{$curso}' and p.id_professor = '{$tut}'";
-        $registrosTotal = mysqli_query($connection, $sql);
-        //mysqli_num_rows = cantidad de registros que me devuelve
-        $numRegistros = mysqli_num_rows($registrosTotal);
+    //       }
+    //       else {
+    //         $limit = ($_GET["pag"]-1)*$cantidad;
+    //         $Pagina =($_GET["pag"]);
+    //       }
+    //     // echo $curso;
+    //       // print_r("SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor ");
+    //     $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor";
+    //     $registrosTotal = mysqli_query($connection, $sql);
+    //     //mysqli_num_rows = cantidad de registros que me devuelve
+    //     $numRegistros = mysqli_num_rows($registrosTotal);
         
       
 
-    //Saber la cantidad de páginas según la cantidad de registros por página
-    $numPaginas = ceil($numRegistros/$cantidad);
-    // echo $numRegistros;
+    // //Saber la cantidad de páginas según la cantidad de registros por página
+    // $numPaginas = ceil($numRegistros/$cantidad);
+    // // echo $numRegistros;
       
         
 
@@ -184,7 +123,7 @@
     </thead>
     <tbody>
     
-       <form action='' method='post'>";
+       <form action='form_mail.php?var=alu' method='post'>";
      
 
   // CABECERAS DE LA TABLA PARA PROFESORES
@@ -206,8 +145,14 @@
 
       // CONSULTA QUE MUESTRA LOS DATOS EN LA TABLA LIMIT Y CANTIDAD PARA LA PAGINACION WHERES PARA LOS FILTROS
 
-      $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor where c.codi_classe like '{$curso}' and p.id_professor =' {$tut} ' LIMIT $limit, $cantidad ";
+    
       $registros = mysqli_query($connection, $sql);
+      $rows=mysqli_num_rows($registros);
+      if($rows == 0){
+        echo"No se han encontrado registros";
+      }else{
+        echo "Registros encontrados: ".$rows;
+      }
         foreach ($registros as $registro => $dato) {
             // var_dump($dato);
             // print_r($registro);
@@ -372,7 +317,7 @@ $tablaProf = $tablaProf.$filaProf;
 $final =<<<wxt
 </body>
 </table>
-
+<button type="submit">Enviar correos</button>
 </form>
    
 
@@ -408,8 +353,13 @@ $buttonBack="<button
 onclick=back({$Pagina},{$numPaginas})>Back</button>";
 echo $buttonBack;
 echo "</div>";
+if(isset($_GET["msg"])){
+  echo"<p>ERROR: Elige una direccion de Email para enviar correos</p>";
+}
+if(isset($_GET["msg2"])){
+  echo"<p>ERROR: Tienes que indicar asunto y mensaje del correo</p>";
+}
 ?>
-<span class="csv"> <button onclick="window.location.href='../pantallas/form_mail.php'" class="btn btn-warning ">Enviar correo</button></span>
 </div>
     </div>
    
