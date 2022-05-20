@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS tbl_dept(
 );
 
 ALTER TABLE tbl_classe
-MODIFY codi_classe varchar(10) NOT NULL;
+MODIFY codi_classe varchar(12) NOT NULL;
 
 ALTER TABLE tbl_admin
 MODIFY passwd varchar(60) NOT NULL;
@@ -112,7 +112,9 @@ INSERT INTO tbl_classe (codi_classe, nom_classe, tutor)
 VALUES ('ASIX2-2122', 'ASIX2 curso 2021/2022', 1);
 
 INSERT INTO tbl_classe (codi_classe, nom_classe, tutor)
-VALUES ('DAW1-2122', 'DAW1 curso 2021/2022', 5);
+VALUES ('CAI1-2122', 'CAI1 curso 2021/2022', 13);
+
+
 --ALUMNOS
 INSERT INTO tbl_alumne(dni_alu, nom_alu, cognom1_alu, cognom2_alu, telf_alu, email_alu, classe, passwd)
 VALUES ('32673315S','Samir', 'Girón', 'Grau', '376538976', 'samirG@gmail.com', 1, '1234');
@@ -150,9 +152,9 @@ WHERE nombre_admin = 'test1';
 
 -- Consultas
 
-update tbl_alumne
-SET passwd = '5c64152cbbe77fa550a73b8eb6be37f15e339acc'
-WHERE id_professor = 1;
+update tbl_professor
+SET img_prof = 'default.png'
+WHERE id_professor = 6;
 
 update tbl_alumne
 SET passwd = '5c64152cbbe77fa550a73b8eb6be37f15e339acc'
@@ -160,6 +162,11 @@ WHERE id_professor = 2;
 update tbl_professor
 SET passwd = '5c64152cbbe77fa550a73b8eb6be37f15e339acc'
 WHERE id_professor = 2;
+
+
+update tbl_dept
+set codi_dept = "GS3"
+WHERE id_dept = 4;
 
  SELECT c.codi_classe FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe;
 
