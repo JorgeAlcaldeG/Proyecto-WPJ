@@ -13,8 +13,28 @@
 
     <link rel="stylesheet" href="../css/CrudAdministradoresProf/styles.css">
 
+    <!-- JS -->
+    <script src="../js/pages2.js"></script>
 </head>
 <body>
+
+
+<!-- La estructura de la wes es la siguiente, hay dos pantallas CRUD, una para mostrar a los registros de alumnos y otra para mostrar los registros de profesores
+.Cada pantalla contiene dos tablas que se van desarrollando con variables. Se abren las cabeceras y se suman filas a la tabla segun los registros
+Los dos tipos de tablas que hay muestran el mismo contenido, pero cambian las funcionalidades segun se ha iniciado session como admin o como profe
+
+Para hacer el código algo más libiano se han hecho includes de los filtros, de manera que los filtros son creados y procesados en otro documento
+para después ser añadidos a este.
+De esta forma nos queda que este documento es capaz de diferenciar el rol del usuario, los contenidos que se muestran y las funcionalidades
+mientras que en el docuemento de filtrso se crean lños formularios y se gestionan las consultas correspondientes -->
+
+
+
+
+
+
+
+
 
 <!-- Div nav -->
 <div class="nav">
@@ -37,7 +57,10 @@
     <!-- div cabecera -->
     <div class="cabecera">
         <h2>Profesores</h2>
-        
+        <div>
+        <button onClick="window.location.href='../proc/proc_logout.php'">Cerrar Sesión</button>
+        </div>
+
     </div>
     <!-- div pagina -->
     <div class="pagina">
@@ -46,39 +69,28 @@
         
        
               <?php 
-             
+              // SESSION Y CONEXION A LA BD
              session_start();
+             include "../proc/conexion.php";
+
+              // Comprobaciones de la sessiones y eviat salto de la url
+            // con los includes incluimos los filtros
               if ($_SESSION['session']==3) {
-                $cabecera= <<<wxt
-                <div class="inputsFiltro"><button>filters</button>
-                <form action="">
-                  <input type="text">
-                </form></div>
-                <div class="botonesFiltro">
-                <span> <button class="btn btn-success"><a id="btn" href="./form.php?typeuser=prof" >Crear Nuevo Registro</a></button></span>
-                <span class="csv"> <button onclick="window.location.href='../proc/save_csv.php'" class="btn btn-warning ">CSV</button></span>
-                </div>  
-                wxt;
-                echo $cabecera;
+                include "../proc/filtrosProf.php";
+
               }elseif (isset($_SESSION['session']) && $_SESSION['session']==2) {
-                $cabecera= <<<wxt
-                <div class="inputsFiltro2"><button>filters</button>
-                <form action="">
-                  <input type="text">
-                </form></div>
+                include "../proc/filtrosProf.php";
         
-                wxt;
-                echo $cabecera;
               }else{
-                echo "<script>window.location.href='index.php'</script>";
+                echo "<script>window.location.href='../index.php'</script>";
               }
-              ?>
+              
       
-      </div>
+      echo"</div>";
+      
 
 
-      
-      <?php
+
       $cantidad = 10;
       $Pagina=1; 
       //Saber si estamos en la página 1 u en otra
@@ -92,18 +104,12 @@
         $Pagina =($_GET["pag"]);
       }
       include "../proc/conexion.php";
-      $sql="SELECT * FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe inner join tbl_professor p on p.id_professor=c.tutor ";
-      $registrosTotal = mysqli_query($connection, $sql);
-      //mysqli_num_rows = cantidad de registros que me devuelve
-      $numRegistros = mysqli_num_rows($registrosTotal);
-      
+ 
 
-//Saber la cantidad de páginas según la cantidad de registros por página
-    $numPaginas = ceil($numRegistros/$cantidad);
-    // echo $numRegistros;
-      
-        
         // echo "<br>";
+
+
+        // CABECERAS DE LA TABLA PARA ADMINISTRADORES
         $tablaAdmin="
           <div class='tabla'>
         <table class='table align-middle mb-0 bg-white'>
@@ -119,6 +125,8 @@
           </thead>
           <tbody>
           <form action='../pantallas/form_mail.php?var=prof' method='post'>";
+
+          // CABECERAS DE LA TABLA PARA ADMINISTRADORES
           $tablaProf="
           <div class='tabla'>
           <table class='table align-middle mb-0 bg-white'>
@@ -131,14 +139,17 @@
             <th>Tutor  </th>
             <th class='acc2'>Acciones</th>
             </tr>
-            </thead>
-            <tbody>
-            <form action='' method='post'>";
-      include "../proc/conexion.php";
-      $sql="SELECT * FROM tbl_professor p inner join tbl_classe c on p.id_professor=c.tutor;";
-      $registros = mysqli_query($connection, $sql);
+            
+      </thead>
+      <body>
       
-        
+         <form action='form_mail.php?var=prof' method='post'>";
+      include "../proc/conexion.php";
+      
+       // SQL ES RECOGIDA DE LOS FILTROS Y RECORREMOS LOS DATOS DE LA CONSULTA
+
+      $registros = mysqli_query($connection, $sql);
+      $rows=mysqli_num_rows($registros);
         echo "<br>";
         foreach ($registros as $registro => $dato) {
             // print_r($dato);
@@ -153,7 +164,7 @@
             
        
       
-    
+      // FILA SI ERES DEL GRUPO ADMINISTRADORES
    $filaAdmin=<<<wxt
     <tr>
     <td class="checkbox">   <input type="checkbox" name="{$dato['id_professor']}" value="{$dato['id_professor']}" id="">
@@ -221,8 +232,11 @@
       </td>
     </tr>
    wxt;
+
+    // OPERACION QUE CONCATENA LAS CABECERAS CON LAS FILAS
    $tablaAdmin = $tablaAdmin.$filaAdmin;
 
+//  FILA SI ERES UN PROFESOR
 $filaProf=<<<wxt
 <tr>
 <td class="checkbox">   <input type="checkbox" name="{$dato['id_professor']}" value="{$dato['id_professor']}" id="">
@@ -233,8 +247,8 @@ $filaProf=<<<wxt
     <!-- IMAGEN -->
     <img
     
-     
-          src=;
+     x
+    src="{$ruta}";
     
           alt=""
           style="width: 45px; height: 45px"
@@ -257,7 +271,7 @@ $filaProf=<<<wxt
 
   </td>
   <td class="dept">
-  <span class="badge badge-success rounded-pill d-inline">{$dato['dept']}</span>
+  <span class="badge badge-success rounded-pill d-inline">{$dato['nom_dept']}</span>
   <td class="tutor">
   {$dato['codi_classe']}
 
@@ -280,16 +294,25 @@ $filaProf=<<<wxt
   </td>
 </tr>
 wxt;
+// OPERACION QUE CONCATENA LAS CABECERAS CON LAS FILAS
 $tablaProf = $tablaProf.$filaProf;
 }
+
+// Final de las tablas que son comunes para las dos
 $final =<<<wxt
-</body>
+
 </table>
 <button type="submit">Enviar correos</button>
 </form>
+</body>
 wxt;
+
+
+// Operacion que concatena las cabeceras y filas  (que estan recogidas previamente en $tablaAdmin o $tablaProf) con el final de la tabla
 $tablaAdmin=$tablaAdmin.$final;
 $tablaProf=$tablaProf.$final;
+
+// Segun el usuario mostramos una tabla o otra.
 if (isset($_SESSION['session']) && $_SESSION['session']==3) {
   echo $tablaAdmin;
 }elseif (isset($_SESSION['session']) && $_SESSION['session']==2) {
@@ -299,6 +322,23 @@ if (isset($_SESSION['session']) && $_SESSION['session']==3) {
   echo "<script>window.location.href='index.php'</script>";
 }
 // echo $Pagina;
+
+
+// Botones para la paginacion
+
+echo"<section class='archive-pages'>";
+echo "<ul>";
+echo "<li class='first'><a href='CrudAdministradoresAlu.php?pag=1' title='first page'>first page</a></li>";
+echo "<li class='previous'><a href='CrudAdministradoresAlu.php?pag=$PaginaAnterior' title='previous page'>previous page</a></li>";
+for($i=1;$i<=$numPaginas;$i++) {
+  echo "<li><a href='CrudAdministradoresAlu.php?pag=$i' title='Pagina $i'>$i</a></li>";
+}
+$cierrepag="  <li class='next'><a href='CrudAdministradoresAlu.php?pag=$PaginaSiguiente' title='next page'>next page</a></li>
+<li class='last'><a href='CrudAdministradoresAlu.php?pag=$numPaginas' title='last page'>last page</a></li>
+</ul>
+</section>";
+echo $cierrepag;
+
 $buttonNext="<button
 onclick=next({$Pagina},{$numPaginas})>Next</button>";
 echo $buttonNext;

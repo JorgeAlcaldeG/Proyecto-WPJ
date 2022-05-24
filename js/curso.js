@@ -29,6 +29,21 @@ function bucle(a) {
             a[i].classList.add("d-inline");
 
         }
+        if (texto == "DAW1-2122") {
+            console.log("bien")
+            a[i].classList.add("badge");
+            a[i].classList.add("badge-info");
+            a[i].classList.add("rounded-pill");
+            a[i].classList.add("d-inline");
 
+        }
+        if (texto == "DAW2-2122") {
+            console.log("bien")
+            a[i].classList.add("badge");
+            a[i].classList.add("badge-success");
+            a[i].classList.add("rounded-pill");
+            a[i].classList.add("d-inline");
+
+        }
     }
 }

@@ -50,6 +50,7 @@ button a {
 .cabecera {
   height: 7vh;
   background-color: white;
+  justify-content: space-between;
   border-bottom: solid 1px #434a54;
   display: flex;
   align-items: center;

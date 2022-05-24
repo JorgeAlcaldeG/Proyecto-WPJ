@@ -16,51 +16,71 @@
     <!-- JS -->
     <script src="../js/curso.js"></script>
     <script src="../js/pages.js"></script>
-    <script src="../js/filtrar.js"></script>
+
 </head>
 <body>
 
+
+<!-- La estructura de la wes es la siguiente, hay dos pantallas CRUD, una para mostrar a los registros de alumnos y otra para mostrar los registros de profesores
+.Cada pantalla contiene dos tablas que se van desarrollando con variables. Se abren las cabeceras y se suman filas a la tabla segun los registros
+Los dos tipos de tablas que hay muestran el mismo contenido, pero cambian las funcionalidades segun se ha iniciado session como admin o como profe
+
+Para hacer el código algo más libiano se han hecho includes de los filtros, de manera que los filtros son creados y procesados en otro documento
+para después ser añadidos a este.
+De esta forma nos queda que este documento es capaz de diferenciar el rol del usuario, los contenidos que se muestran y las funcionalidades
+mientras que en el docuemento de filtrso se crean lños formularios y se gestionan las consultas correspondientes -->
+
+
+
+
+
+
 <!-- Div nav -->
 <div class="nav">
-    <span id="logo"></span>
+    <!-- <span id="logo"></span> -->
+    <span class="h3" id="spanFilters">Filters</span>
     <span id="spanAlumnos">
     <a href="./CrudAdministradoresAlu.php">Alumnos</a>
     </span>
     <span id="spanProfesores">
         <a href="./CrudAdministradoresProf.php">Profesores</a>
     </span>
-    
-    
- 
-
 </div>
 
 <!-- Div box -->
 <div class="box">
 
-    <!-- div cabecera -->
-    <div class="cabecera">
-        <h2>Alumnos</h2>
 
+  <!-- div cabecera -->
+  <div class="cabecera">
+    <div>
+      <h2>Alumnos</h2>
     </div>
+    <div>
+      <button onClick="window.location.href='../proc/proc_logout.php'">Cerrar Sesión</button>
+    </div>
+  </div>
     <!-- div pagina -->
     
     <div class="pagina">
-    <span class="h3">Filters</span>
-        <div class="filters">
+  
+        <div class="filters" id="filters">
         <?php 
             // SESSION Y CONEXION A LA BD
              session_start();
              include "../proc/conexion.php";
             
-            
+
+
+            // Comprobaciones de la sessiones y eviat salto de la url
+            // con los includes incluimos los filtros
              if ($_SESSION['session']==3) {
               include "../proc/filtrosAdmin.php";
             
              }elseif (isset($_SESSION['session']) && $_SESSION['session']==2) {
-               include "../proc/filtorsProf.php";
+              include "../proc/filtrosAdmin.php";
              }else{
-               echo "<script>window.location.href='index.php'</script>";
+               echo "<script>window.location.href='../index.php'</script>";
              }
              
 
@@ -105,7 +125,7 @@
 
 
   // CABECERAS DE LA TABLA PARA ADMINISTRADORES
-        // echo "<br>";
+    
         $tablaAdmin="
         <div class='tabla'>
         <table class='table align-middle mb-0 bg-white'>
@@ -126,7 +146,7 @@
        <form action='form_mail.php?var=alu' method='post'>";
      
 
-  // CABECERAS DE LA TABLA PARA PROFESORES
+  // CABECERAS DE LA TABLA PARA ADMINISTRADORES
         $tablaProf="
         <div class='tabla'>
     <table class='table align-middle mb-0 bg-white'>
@@ -137,22 +157,23 @@
         <th>Tutor</th>
         <th>Clase</th>
         <th class='acc2'>Acciones</th>
-      </tr>";
+      </tr>
+
+
+      </thead>
+      <body>
+      
+         <form action='form_mail.php?var=prof' method='post'>";
+       
 
 
 
-
-
-      // CONSULTA QUE MUESTRA LOS DATOS EN LA TABLA LIMIT Y CANTIDAD PARA LA PAGINACION WHERES PARA LOS FILTROS
+      // SQL ES RECOGIDA DE LOS FILTROS Y RECORREMOS LOS DATOS DE LA CONSULTA
 
     
       $registros = mysqli_query($connection, $sql);
       $rows=mysqli_num_rows($registros);
-      if($rows == 0){
-        echo"No se han encontrado registros";
-      }else{
-        echo "Registros encontrados: ".$rows;
-      }
+      
         foreach ($registros as $registro => $dato) {
             // var_dump($dato);
             // print_r($registro);
@@ -165,7 +186,7 @@
             // echo $dato['img'];
         
 
-  // FILA ADMINISTRADORES
+  // FILA SI ERES DEL GRUPO ADMINISTRADORES
    $filaAdmin=<<<wxt
     <tr>
     <td class="checkbox">   <input type="checkbox" name="{$dato['id_alumne']}" value="{$dato['id_alumne']}" id="">
@@ -235,6 +256,7 @@
     
   
     wxt;
+    // OPERACION QUE CONCATENA LAS CABECERAS CON LAS FILAS
     $tablaAdmin = $tablaAdmin.$filaAdmin;
    
   
@@ -242,7 +264,7 @@
 
 
  
- 
+//  FILA SI ERES UN PROFESOR
 $filaProf=<<<wxt
 
  <tr>
@@ -255,7 +277,7 @@ $filaProf=<<<wxt
      <img
      
       
-           src="{$ruta}"."{$dato['img_alu']}";
+           src="{$ruta}";
      
            alt=""
            style="width: 45px; height: 45px"
@@ -264,7 +286,7 @@ $filaProf=<<<wxt
        <div class="ms-3">
 
        <!-- NOMBRE Y PRIMER APELLIDO-->
-         <p class="fw-bold mb-1">{$dato['id_alumne']} {$dato['cognom1_alu']} {$dato['cognom2_alu']}</p>
+         <p class="fw-bold mb-1">{$dato['nom_alu']} {$dato['cognom1_alu']} {$dato['cognom2_alu']}</p>
 
          <!-- Nombre y segundo -->
          <p class="text-muted mb-0">{$dato['dni_alu']}</p>
@@ -311,21 +333,28 @@ $filaProf=<<<wxt
 
 
 wxt;
+// OPERACION QUE CONCATENA LAS CABECERAS CON LAS FILAS
 $tablaProf = $tablaProf.$filaProf;
 
 }
+
+
+// Final de las tablas que son comunes para las dos
 $final =<<<wxt
-</body>
+
 </table>
 <button type="submit">Enviar correos</button>
 </form>
-   
+</body>  
 
 
 wxt;
-
+// Operacion que concatena las cabeceras y filas  (que estan recogidas previamente en $tablaAdmin o $tablaProf) con el final de la tabla
 $tablaAdmin=$tablaAdmin.$final;
 $tablaProf=$tablaProf.$final;
+
+
+// Segun el usuario mostramos una tabla o otra.
 if (isset($_SESSION['session']) && $_SESSION['session']==3) {
   echo $tablaAdmin;
 }elseif (isset($_SESSION['session']) && $_SESSION['session']==2) {
@@ -335,24 +364,44 @@ if (isset($_SESSION['session']) && $_SESSION['session']==3) {
   echo "<script>window.location.href='index.php'</script>";
 }
 // echo $Pagina;
+
+
+
+// Botones para la paginacion
 echo "<div class='pages'>";
 $buttonNext="<button
 onclick=next({$Pagina},{$numPaginas})>Next</button>";
-echo $buttonNext;
-for($i=1;$i<=$numPaginas;$i++) {
-  if ($i==1) {
-    echo "<span><a href='CrudAdministradoresAlu.php?pag=$i'> Inicio | </a></span>";
-  }elseif ($i==$numPaginas) {
-    echo "<span><a href='CrudAdministradoresAlu.php?pag=$i'> Final  | </a></span>";
-  } else{
-    echo "<span><a href='CrudAdministradoresAlu.php?pag=$i'> $i  | </a></span>";
-  }
-  
+
+if ($Pagina == 1) {
+ 
+  $PaginaAnterior=1;
+}else{
+
+  $PaginaAnterior=$Pagina-1;  
 }
-$buttonBack="<button
-onclick=back({$Pagina},{$numPaginas})>Back</button>";
-echo $buttonBack;
-echo "</div>";
+
+if ($Pagina == $numPaginas) {
+ 
+  $PaginaSiguiente=$numPaginas;
+}else{
+
+  $PaginaSiguiente=$Pagina+1;  
+}
+
+
+echo"<section class='archive-pages'>";
+echo "<ul>";
+echo "<li class='first'><a href='CrudAdministradoresAlu.php?pag=1' title='first page'>first page</a></li>";
+echo "<li class='previous'><a href='CrudAdministradoresAlu.php?pag=$PaginaAnterior' title='previous page'>previous page</a></li>";
+for($i=1;$i<=$numPaginas;$i++) {
+  echo "<li><a href='CrudAdministradoresAlu.php?pag=$i' title='Pagina $i'>$i</a></li>";
+}
+$cierrepag="  <li class='next'><a href='CrudAdministradoresAlu.php?pag=$PaginaSiguiente' title='next page'>next page</a></li>
+<li class='last'><a href='CrudAdministradoresAlu.php?pag=$numPaginas' title='last page'>last page</a></li>
+</ul>
+</section>";
+echo $cierrepag;
+
 if(isset($_GET["msg"])){
   echo"<p>ERROR: Elige una direccion de Email para enviar correos</p>";
 }

@@ -219,3 +219,12 @@ option {
  ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+.Correo {
+    color: white;
+}
+
+#newuserName {
+    color: white;
+    text-align: center;
+}

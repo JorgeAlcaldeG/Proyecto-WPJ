@@ -41,6 +41,7 @@
                     $_SESSION['session'] = 3;
                     $_SESSION['id'] = $datos['id_admin'];
                     $_SESSION['nom'] = $datos['nombre_admin'];
+                    $_SESSION['apellido']=$datos['apellido_admin'];
                     $_SESSION['email'] = $datos['email_admin'];
                     echo "<script> window.location.href='./../pantallas/CrudAdministradoresAlu.php'</script>";
                 }else {
@@ -59,6 +60,7 @@
                         $_SESSION['session'] = 2;
                         $_SESSION['id'] = $datos['id_professor'];
                         $_SESSION['nom'] = $datos['nom_prof'];
+                        $_SESSION['apellido']=$datos['cognom1_prof'];
                         $_SESSION['email'] = $datos['email_prof'];
                         echo "<script> window.location.href='./../pantallas/CrudAdministradoresAlu.php'</script>";
                     }else {
@@ -76,6 +78,7 @@
                         if($contador == 1) {
                             $_SESSION['session'] = 1;
                             $_SESSION['nom'] = $datos['nom_alu'];
+                            $_SESSION['apellido']=$datos['cognom1_alu'];
                             echo "<script> window.location.href='./alumn.php'</script>";   
                         }else {
                             echo "<script> window.location.href='./../index.php?msg=1'</script>";   

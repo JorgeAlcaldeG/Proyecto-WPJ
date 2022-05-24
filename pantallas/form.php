@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    
     <!-- partial:index.partial.html -->
     <div class="login-box">        
         <?php
@@ -23,30 +24,33 @@
         $EST = 0;
         if ($_GET['typeuser'] == 'alu' ) {
             $EST = 1;
+            echo'<script  src="../js/valid_NewUserAlu.js"></script>';
             echo "<h2>Registro Alumno</h2>";
             // redireccionamiento a la pagina inicio
-        }else
-        echo "<h2>Registro Profesor</h2>";
+        }else{
+            echo'<script  src="../js/valid_NewUserProf.js"></script>';
+            echo "<h2>Registro Profesor</h2>";
+        }
 
         // $_GET['typeuser']=alu
         // $_GET['typeuser']=prof
         ?>
         <form action="./../proc/proc_insert.php" method="post" enctype="multipart/form-data">
             <div class="user-box">
-                <input type="text" name="nom" required>
+                <input type="text" id="newusername" name="nom" required>
                 <label>Nombre</label>
             </div>
             <div class="user-box">
-                <input type="text" name="apellido" required>
+                <input type="text" id="newuserape1" name="apellido" required>
                 <label>Primer Apellido</label>
             </div>
             <div class="user-box">
-                <input type="text" name="apellido2" required>
+                <input type="text" id="newuserape2" name="apellido2" required>
                 <label>Segundo Apellido</label>
             </div>
             <?php
             if ($EST == 1) {
-                echo "<div class='user-box'> <input type='text' name='Nie' required=''><label>DNI/NIE</label></div>";
+                echo "<div class='user-box'> <input type='text' id='newuserdni' name='Nie' required=''><label>DNI/NIE</label></div>";
             }else{
 
             }
@@ -73,11 +77,11 @@
                 </select>
             </div>
             <div class="user-box">
-                <input type="number" name="telf" required>
+                <input type="number" id="newusertel" name="telf" required>
                 <label>Telefono</label>
             </div>
             <div class="user-box">
-                <input type="email" name="mail" required>
+                <input type="email" id="newusermail" name="mail" required>
                 <label>Correo / Email </label>
             </div>
             <div class="user-box">
@@ -85,6 +89,7 @@
                 <input class="form-control form-control-sm" type="file"  name='foto'>
             </div>
         </div>
+        <span id="NewUserMSG"></span>
         <input type="submit" value="Registrar" class="btn">
         </form>
     

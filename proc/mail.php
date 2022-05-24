@@ -8,10 +8,15 @@ require 'PHPMailer/SMTP.php';
 $asunto = $_POST["asunto"];
 $mensaje = $_POST["mensaje"];
 $num = $_POST["numcorreo"];
+$fichero = $_FILES['fichero'];
+session_start();
+$nombre= $_SESSION['nom']." ".$_SESSION['apellido'];
+//echo $nombre;
 if(empty($asunto) || empty($mensaje) || empty($num)){
     header("Location: ../pantallas/form_mail.php?msg=error&var={$_GET["var"]}");
 }
 //Create an instance; passing `true` enables exceptions
+
 $mail = new PHPMailer(true);
 try {
     //Server settings
@@ -25,7 +30,7 @@ try {
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('phpmailerproyectoj23@gmail.com', 'Administradores');
+    $mail->setFrom('phpmailerproyectoj23@gmail.com', $nombre);
     $mail->addAddress('jorge-2806@hotma.ca');
     // for ($i=0; $i<$num; $i++){
     //     $mail->addAddress($_POST[$i]);     //Add a recipient
@@ -35,9 +40,11 @@ try {
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
 
-    // //Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    //Attachments
+    if($fichero["size"]!=0){
+        $mail->addAttachment($fichero["tmp_name"], $fichero["name"]);         //Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    }
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
