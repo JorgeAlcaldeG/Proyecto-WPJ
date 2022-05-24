@@ -16,10 +16,13 @@
     $EST = 0;
     if ($_GET['typeuser'] == 'alu' ) {
         $EST = 1;
+        echo'<script  src="../js/valid_NewUserAlu.js"></script>';
         echo "<h2>Registro Alumno</h2>";
         // redireccionamiento a la pagina inicio
-    }else
-    echo "<h2>Registro Profesor</h2>";
+    }else{
+        echo'<script  src="../js/valid_NewUserProf.js"></script>';
+        echo "<h2>Registro Profesor</h2>";
+    }
     
     $id=$_GET["var"];
     $typeuser=$_GET["typeuser"];

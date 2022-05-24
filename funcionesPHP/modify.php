@@ -8,7 +8,7 @@ function modifyAlu($id){
     echo"
     <form action='../proc/update.php' method='post'enctype='multipart/form-data'>
     <div class='user-box'>
-        <input type='text' name='nombre' value='".$user['nom_alu']."'>
+        <input type='text' name='nombre' id='newusername' value='".$user['nom_alu']."'>
         <label>Nombre</label>
     </div>
     <div class='user-box'>
@@ -59,7 +59,7 @@ function modifyProf($id){
     echo"
     <form action='../proc/update.php' method='post'enctype='multipart/form-data'>
     <div class='user-box'>
-        <input type='text' name='nombre' value='".$user['nom_prof']."'>
+        <input type='text' name='nombre' id='newusername' value='".$user['nom_prof']."'>
         <label>Nombre</label>
     </div>
     <div class='user-box'>
