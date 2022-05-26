@@ -30,7 +30,7 @@
 										<div class="section text-center">
 											<!------------------------------INICIO-FORMULARRIO-INICIO-DE-SESIÓN------------------------------->
 											<form action="./proc/proc_login.php" method="post">
-												<h4 class="mb-4 pb-3">JOAN XX</h4>
+												<h4 class="mb-4 pb-3">Wilson school</h4>
 												<div class="form-group">
 													<input type="email" name="logemail" class="form-style" placeholder="Usuario" id="logemail" autocomplete="off">
 													<i class="input-icon uil uil-at"></i>

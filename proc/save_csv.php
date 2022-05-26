@@ -34,5 +34,9 @@ require 'conexion.php';
         header('Content-Length: ' . filesize($fileAlu));
         readfile($fileAlu);
     }
-  
+?>
+    
+</body>
+</html>
+
 

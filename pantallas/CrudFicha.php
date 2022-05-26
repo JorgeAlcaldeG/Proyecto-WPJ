@@ -15,6 +15,11 @@
 <body>
 <?php
     include '../funcionesPHP/perfil.php';
+    session_start();
+if (!isset($_SESSION['session'])) {
+    echo "<script>window.location.href='./../index.php'</script>";
+  }else{
+
 ?>
 <!-- Div nav -->
 <div class="nav">
@@ -46,6 +51,7 @@
         }else{
             perfilProf($_GET["var"]);
         }
+    }
     ?>
     </div>
 

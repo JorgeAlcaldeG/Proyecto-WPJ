@@ -4,42 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="./../css/style.css">
+    <link rel="stylesheet" href="./../css/form/style.css">
     <title>Document</title>
 </head>
+<body>
 <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-<script>
-function aviso(url){
-    console.log(3)
-    Swal.fire({
-        icon: 'success',
-        title: 'Usuario Añadidos',
-        text: 'No se han encontrado ninguna inicidencia',
-        showConfirmButton: true,
-        confirmButtonText: 'Inicio'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = url;
-        }
-    })
-}
-function error(url){
-    Swal.fire({
-        icon: 'error',
-        title: 'Usuario Conflictivo',
-        text: 'Algun dato puede ya estar registrado, revise su formulario',
-        showConfirmButton: true,
-        confirmButtonText: 'Regresar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = url;
-        }
-    })
-}
-</script>
-
+<script src='./../js/alertas.js'></script>
 <?php
 require "conexion.php";
 if (!isset($_POST['Nie'])) {
@@ -77,9 +47,9 @@ if (!isset($_POST['Nie'])) {
             if($contador == 0) {
                     //CONEXION A LA BASE DE DATOS
                     // SUBIR LOS DATOS EN LA BASE DA DATOS
-                    $sql = "INSERT INTO tbl_professor (`nom_prof`, `cognom1_prof`, `cognom2_prof`, `email_prof`, `telf`, `dept`, `passwd`, `img_prof`) VALUES ('$name', '$lastnam', '$lstnam2', '$email', '$telf', '$curs', '$psw', '$foto');";
+                    $sql = "INSERT INTO tbl_professor (`nom_prof`, `cognom1_prof`, `cognom2_prof`, `email_prof`, `telf`, `dept`, `passwd`, `img_prof`,`classe`) VALUES ('$name', '$lastnam', '$lstnam2', '$email', '$telf', '$curs', '$psw', '$foto', 5);";
                     $insert = mysqli_query($connection , $sql);
-                    echo "<script>aviso('./../pantallas/CrudAdministradoresProf.php');</script>";
+                    echo "<script>aviso1('./../pantallas/CrudAdministradoresProf.php');</script>";
                 }else{
                 }
         
@@ -104,16 +74,16 @@ if (!isset($_POST['Nie'])) {
                 if (move_uploaded_file($foto['tmp_name'],$destino)) {
                     //CONEXION A LA BASE DE DATOS
                     // SUBIR LOS DATOS EN LA BASE DA DATOS
-                    $sql = "INSERT INTO tbl_professor (`nom_prof`, `cognom1_prof`, `cognom2_prof`, `email_prof`, `telf`, `dept`, `passwd`, `img_prof`) VALUES ('$name', '$lastnam', '$lstnam2', '$email', '$telf', '$curs', '$psw', '$nombrefichero');";
+                    $sql = "INSERT INTO tbl_professor (`nom_prof`, `cognom1_prof`, `cognom2_prof`, `email_prof`, `telf`, `dept`, `passwd`, `img_prof`, `classe`) VALUES ('$name', '$lastnam', '$lstnam2', '$email', '$telf', '$curs', '$psw', '$nombrefichero',5);";
                     $insert = mysqli_query($connection , $sql);
-                    echo "<script>aviso('./../pantallas/CrudAdministradoresProf.php');</script>";
+                    echo "<script>aviso1('./../pantallas/CrudAdministradoresProf.php');</script>";
                 }
             }else{
     
-                echo "Correo utilizado ya esta en uso, porfavor registrese con otro correo";
+                echo "<script>error('./../pantallas/CrudAdministradoresProf.php');</script>";
             }
         }else{
-            echo "El archivo que intentas subir es demsaido grande y supera los 50K";
+            echo "<script>error1('./../pantallas/CrudAdministradoresProf.php');</script>";
         }
     }
  }else{
@@ -155,9 +125,9 @@ if (!isset($_POST['Nie'])) {
                     // SUBIR LOS DATOS EN LA BASE DA DATOS
                     $sql = "INSERT INTO tbl_alumne (`dni_alu`, `nom_alu`, `cognom1_alu`, `cognom2_alu`, `telf_alu`, `email_alu`, `classe`, `passwd`, `img_alu`) VALUES ('$NIE', '$name', '$lastnam', '$lstnam2', '$telf', '$email', '$curs', '$psw', '$foto');";
                     $insert = mysqli_query($connection , $sql);
-                    echo "<script>aviso('./../pantallas/CrudAdministradoresAlu.php');</script>";
+                    echo "<script>aviso1('./../pantallas/CrudAdministradoresAlu.php');</script>";
                 }else{
-                    echo "Correo o NIE esta ya en uso, porfavor compruebe los datos";
+                    echo "<script>error('./../pantallas/CrudAdministradoresAlu.php');</script>";
                 }
         
     }else{
@@ -183,20 +153,20 @@ if (!isset($_POST['Nie'])) {
                     // SUBIR LOS DATOS EN LA BASE DA DATOS
                     $sql = "INSERT INTO tbl_alumne (`dni_alu`, `nom_alu`, `cognom1_alu`, `cognom2_alu`, `telf_alu`, `email_alu`, `classe`, `passwd`, `img_alu`) VALUES ('$NIE', '$name', '$lastnam', '$lstnam2', '$telf', '$email', '$curs', '$psw', '$nombrefichero');";
                     $insert = mysqli_query($connection , $sql);
-                    echo "<script>aviso('./../pantallas/CrudAdministradoresAlu.php');</script>";
+                    echo "<script>aviso1('./../pantallas/CrudAdministradoresAlu.php');</script>";
                 }
             }else{
-                echo "<script>error('./../pantallas/form.php');</script>";
+                echo "<script>error('./../pantallas/CrudAdministradoresAlu.php');</script>";
     
                 echo "Correo o NIE esta ya en uso, porfavor compruebe los datos";
             }
         }else{
-            echo "El archivo que intentas subir es demsaido grande y supera los 50K";
+            echo "<script>error1('./../pantallas/CrudAdministradoresAlu.php');</script>";
         }
     }
 }
 ?>
-<body>
+
     <br>
 </body>
 </html>

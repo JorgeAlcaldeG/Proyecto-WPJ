@@ -18,6 +18,14 @@
     <!-- partial:index.partial.html -->
     <div class="login-box">        
         <?php
+    session_start();
+    if (!isset($_SESSION['session'])) {
+        echo "<script>window.location.href='./../index.php'</script>";
+      }elseif ($_SESSION['session']==1) {
+        echo "<script>window.location.href='./../proc/alumn.php'</script>";
+
+      }
+      else{
         
         require './../proc/conexion.php';
         require './../funcionesPHP/modify.php';
@@ -64,7 +72,10 @@
                         $sqlcurso = "SELECT id_classe, codi_classe FROM tbl_classe;";
                         $option = mysqli_query($connection, $sqlcurso);
                         foreach($option as $curso){
-                        echo "<option  value='{$curso['id_classe']}'>{$curso['codi_classe']}</option>";
+                            if ($curso['id_classe']== 5){
+                            }else{
+                                echo "<option  value='{$curso['id_classe']}'>{$curso['codi_classe']}</option>";
+                            }
                         }
                     }else {
                         $sqlcurso = "SELECT id_dept, nom_dept FROM tbl_dept;";
@@ -94,7 +105,9 @@
         </form>
     
     <!-- partial -->
-
+    <?php
+      }
+    ?>
 </body>
 
 </html>

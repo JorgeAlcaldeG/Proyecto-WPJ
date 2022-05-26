@@ -21,6 +21,7 @@
         require 'conexion.php';
         if (isset($_POST['insesion'])|| $_SERVER["REQUEST_METHOD"] == "POST") {
             if (empty($_POST['logemail']) || empty($_POST['logpass'])) {    
+                echo "<script> window.location.href='./../index.php?msg=1'</script>"; 
             } else{
                 $email = mysqli_real_escape_string($connection, $_POST['logemail']);
                 $pwd = sha1(mysqli_real_escape_string($connection, $_POST['logpass']));
@@ -31,7 +32,7 @@
                 //Realizamos la consulta y anadimos $connection, ya que es la variable que creamos en nuestro archivo connection.php    
                 $resultado = $connection->query($sesion);
                 
-                //Usaremos la funcion mysqli_num_rows en la consulta $resultado,
+                //Usaremos lax funcion mysqli_num_rows en la consulta $resultado,
                 //esta funcion nos regresa el numero de filas en el resultado
                 $contador = mysqli_num_rows($resultado);
     

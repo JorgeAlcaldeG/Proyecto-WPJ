@@ -13,14 +13,18 @@
 <body>
 <div class="login-box">        
     <?php
+    session_start();
+        if (!isset($_SESSION['session'])) {
+            echo "<script>window.location.href='./../index.php'</script>";
+          }else{
+    
     $EST = 0;
     if ($_GET['typeuser'] == 'alu' ) {
         $EST = 1;
-        echo'<script  src="../js/valid_NewUserAlu.js"></script>';
+        
         echo "<h2>Registro Alumno</h2>";
         // redireccionamiento a la pagina inicio
     }else{
-        echo'<script  src="../js/valid_NewUserProf.js"></script>';
         echo "<h2>Registro Profesor</h2>";
     }
     
@@ -28,7 +32,7 @@
     $typeuser=$_GET["typeuser"];
     
     include '../proc/conexion.php';
-    include '../funcionesphp/modify.php';
+    include '../funcionesPHP/modify.php';
 
     // $sql = "SELECT * FROM tbl_alumne WHERE id_alumne={$id}";
     // $sqlcurso = "SELECT id_classe, codi_classe FROM tbl_classe";
@@ -43,8 +47,11 @@
     if(isset($_GET['msg'])){
                 echo'<p>Sube una imagen con el siguiente formato: jpg, gif o png</p>';     
             }
+    echo "<span id='NewUserMSG'></span>";
+    echo "</div>";
+
+}
 ?>
-</div>
 
 </body>
 </html>

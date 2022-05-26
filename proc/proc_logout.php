@@ -14,35 +14,14 @@
     <title>Cerrar Sesion</title>
 </head>
 <body>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./../js/alertas.js"></script>
     <br>
     <?php
     session_start();
 
     session_destroy();
     ?>
-        
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function aviso(url) {
-            Swal.fire({
-                title: 'Has cerrado sesión correctamente.',
-                width: 600,
-                padding: '3em',
-                color: '#716add',
-                backdrop: `
-                        #02ec9e00
-                        url("https://sweetalert2.github.io/images/nyan-cat.gif")
-                        left top
-                        repeat
-                      `
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = url;
-                    }
-                })
-        }
-        aviso('../index.php');
-    </script>
+    <script>out('./../index.php');</script>
 </body>
 </html>

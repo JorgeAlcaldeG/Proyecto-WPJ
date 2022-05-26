@@ -89,7 +89,7 @@ var validaMail = function(evento) {
             parrafo.appendChild(contenido);
             document.getElementById("NewUserMSG").appendChild(parrafo);
             parrafo.setAttribute('id', 'newuserName');
-
+            
         }
         event.target.focus();
     } else {

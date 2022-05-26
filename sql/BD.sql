@@ -69,6 +69,14 @@ MODIFY passwd varchar(60) NOT NULL;
 ALTER TABLE tbl_alumne
 ADD COLUMN img varchar(30) NOT NULL;
 
+ALTER TABLE tbl_professor
+ADD COLUMN classe int(2) NOT NULL;
+
+
+
+update tbl_professor
+set classe = 2
+where id_professor = 2;
 /* Modificacions de les taules per cració de les FK*/
 
 ALTER TABLE tbl_alumne
@@ -162,4 +170,6 @@ SET passwd = '5c64152cbbe77fa550a73b8eb6be37f15e339acc'
 WHERE id_professor = 2;
 
  SELECT c.codi_classe FROM tbl_classe c inner join tbl_alumne a on a.classe=c.id_classe;
+
+ ALTER TABLE tbl_classe DROP Column tutor;   
 

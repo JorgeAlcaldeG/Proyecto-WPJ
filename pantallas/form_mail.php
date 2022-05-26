@@ -13,7 +13,14 @@
     <link rel="stylesheet" href="./../css/form/style.css">
 </head>
 <body>
-<div class="login-box">   
+    <?php
+    session_start();
+    if (!isset($_SESSION['session'])) {
+        echo "<script>window.location.href='./../index.php'</script>";
+      }else{
+    
+    ?>
+<div class="login-box">
     <h2>Enviar correo</h2>
     <?php
     //var_dump($_POST);
@@ -59,16 +66,18 @@
     }
     //ECHO $_POST["2"];
     ?>
-    <form action="../proc/mail.php" method="post" enctype='multipart/form-data'>
+    <form action="../proc/mail.php" method="post" id="mailform" enctype='multipart/form-data'>
     <div class="user-box">
-        <input type="text" name="asunto" placeholder="Asunto">
+        <input type="text" id="asunto" name="asunto" placeholder="Asunto">
     </div>
     <div class="user-box">
-        <input type="text" name="mensaje" placeholder="Mensaje">
+        <!-- <input type="text" id="mensaje" name="mensaje" placeholder="Mensaje"> -->
+	<textarea name="mensaje" id="mensaje" form="mailform" placeholder="Mensaje"></textarea>
     </div>
     <div class="user-box">
         <input type='file' name='fichero' placeholder='Fichero'>
         </div>
+    <span id="mailmens"></span>
     <div class="user-box">
         <button type="submit" class="btn">Enviar</button>
     </div>
@@ -82,8 +91,9 @@
         }
         echo"<input type='hidden' name='numcorreo' value=$count>";
         echo"<input type='hidden' name='typeuser' value={$_GET["var"]}>";
+    echo"</form>";
+    echo "</div>";
+}
         ?>
-    </form>
-</div>
 </body>
 </html>

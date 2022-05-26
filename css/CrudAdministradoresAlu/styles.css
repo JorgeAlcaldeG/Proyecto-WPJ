@@ -10,7 +10,7 @@ form {
   padding-left: 55%;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  justify-content: flex-end;
 }
 .form:hover {
   color: #ffffff;
@@ -21,6 +21,45 @@ form {
   background-color: #000000;
   color: #ffffff;
   box-shadow: 0 8px 24px 0 rgba(112, 16, 16, 0.2);
+}
+.form-check {
+  margin: 1%;
+}
+.modal-footer {
+  background-color: #434a54;
+}
+.modal-content {
+  background-color: #0e90ab;
+}
+.modalButons {
+  display: flex;
+  justify-content: center;
+}
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btnTodos {
+  border: none;
+  border-radius: 30px;
+  width: 40%;
+  margin-bottom: 5% !important;
+}
+.btnTodos2 {
+  border: none;
+  /* border-radius: 30px; */
+  margin-bottom: 5% !important;
+}
+.selectCrud {
+  margin-left: 15%;
+  margin-right: 1%;
+  position: relative;
+  top: -3%;
+}
+.desSelectCrud {
+  position: relative;
+  top: -3%;
 }
 .btn a:hover {
   background-color: #1b9237;
@@ -67,14 +106,14 @@ form {
   font-size: 3vh;
   color: #E7E7E7;
   position: relative;
-  top: 9vh;
+  top: 13vh;
 }
 .box {
   width: 100%;
   height: 100vh;
 }
 .cabecera {
-  padding-left: 10%;
+  padding-left: 15%;
   height: 7vh;
   background-color: white;
   border-bottom: solid 1px #434a54;
@@ -91,6 +130,7 @@ form {
   left: 5%;
 }
 .pagina {
+  overflow: hidden;
   padding-left: 10%;
   height: 93vh;
   background-color: #E7E7E7;
@@ -104,11 +144,14 @@ form {
   top: 2%;
 }
 .filters {
+  position: relative;
+  top: 5%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   background-color: #434a54;
-  width: 80%;
+  width: 30%;
+  height: 8vh;
 }
 .filters span {
   width: auto;
@@ -146,19 +189,110 @@ form {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  position: relative;
+  right: 10%;
+}
+.botonesFiltro .btn {
+  position: relative;
+  right: 10%;
+}
+.modal-content {
+  background-color: #434a54;
+}
+.form-input-material {
+  --input-default-border-color: white;
+  --input-border-bottom-color: white;
+}
+.form-input-material input {
+  color: white;
+}
+.modalForm {
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+.modalForm input {
+  margin: 2%;
+  background-color: #434a54;
+  color: white;
+  border: none;
+  border-bottom: #ffffff solid 1px;
+}
+.modalForm input::placeholder {
+  color: #c2c2c2;
+}
+.tbl {
+  border-radius: 25px;
+  background-color: #999999;
+  width: 60%;
+  border: solid 2px black;
+  display: table;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10%;
+}
+.tbl label {
+  margin-left: 3%;
 }
 .tabla {
   margin-left: 5%;
   width: 90%;
   position: relative;
-  top: 10%;
+  top: -2%;
   height: 40vh;
 }
-.tabla .acc {
+.tabla tbody {
+  height: 55vh;
+  overflow: auto;
+  overflow-x: hidden;
+  width: 100%;
+}
+.tabla thead,
+.tabla tbody,
+.tabla td,
+.tabla th {
+  display: block;
+}
+.tabla .cabecerasTabla {
+  width: 100%;
+}
+.tabla .cabecerasTabla .seleccionar {
+  padding-right: 5%;
+}
+.tabla .cabecerasTabla .nombre {
+  width: 0%;
+}
+.tabla .cabecerasTabla .email {
+  width: 35%;
+}
+.tabla .cabecerasTabla .tutor {
+  width: 5%;
+}
+.tabla .cabecerasTabla .clase {
+  width: 35%;
+}
+.tabla th {
+  text-align: center;
+  float: left;
+  border-bottom-width: 0px ;
+}
+.tabla td {
+  float: left;
+}
+.tabla td.acciones2 {
   padding-left: 5%;
 }
-.tabla .cabeceraTabla {
-  position: fixed;
+.tabla td.curso2 {
+  padding-right: 18%  ;
+  padding-left: 3%;
+}
+.tabla td.curso {
+  padding-right: 18%  ;
+  padding-left: 3%;
+}
+.tabla tr {
+  width: 100%;
+  float: left ;
 }
 .checkbox {
   width: 2%;
@@ -182,7 +316,6 @@ form {
   width: 15%;
 }
 .acciones {
-  width: 100%;
   display: flex;
   justify-content: space-evenly;
 }
@@ -201,7 +334,6 @@ form {
   color: #ab4452;
 }
 .acciones2 {
-  width: 100%;
   display: flex;
 }
 .acciones2 span .svg1 {
@@ -209,7 +341,9 @@ form {
   width: 30px;
 }
 .pages {
-  padding-top: 2%;
+  position: relative;
+  top: 25%;
+  margin-left: 5%;
 }
 .archive-pages li a:hover {
   color: #000;
@@ -349,4 +483,379 @@ form {
 .archive-pages .last a {
   text-indent: -154px;
   letter-spacing: 10px;
+}
+.enviarCorreos {
+  position: relative;
+  top: 23%;
+  left: 80%;
+}
+.registrosEncontrados {
+  position: relative;
+  top: -6%;
+  margin-left: 40%;
+  width: 20%;
+  text-align: center;
+  padding: 0.5%;
+  border: solid #434a54 1px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #E7E7E7;
+  background-color: #17a2b8;
+}
+@media (max-width: 1150px) {
+  .enviarCorreos {
+    position: relative;
+    top: 25%;
+    left: 80%;
+  }
+  .tabla tbody {
+    height: 50vh;
+    overflow: auto;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  .tabla thead,
+  .tabla tbody,
+  .tabla td,
+  .tabla th {
+    display: block;
+  }
+  .tabla .cabecerasTabla {
+    width: 100%;
+  }
+  .tabla .cabecerasTabla .seleccionar {
+    padding-right: 5%;
+  }
+  .tabla .cabecerasTabla .nombre {
+    width: 5%;
+  }
+  .tabla .cabecerasTabla .email {
+    width: 30%;
+  }
+  .tabla .cabecerasTabla .clase {
+    width: 35%;
+  }
+  .tabla th {
+    text-align: center;
+    float: left;
+    border-bottom-width: 0px ;
+  }
+  .tabla td {
+    float: left;
+  }
+  .tabla td.tutor {
+    display: none;
+  }
+  .tabla th.tutor {
+    display: none;
+  }
+  .tabla td.curso {
+    padding-left: 10%;
+  }
+  .tabla td.curso2 {
+    padding-left: 10%;
+  }
+  .tabla td.nombre {
+    width: 30%;
+  }
+  .tabla td.acc {
+    padding-left: 5%;
+  }
+  .tabla td.acciones2 {
+    padding-left: 5%;
+  }
+  .registrosEncontrados {
+    position: relative;
+    top: 2%;
+    margin-left: 45%;
+    width: 35%;
+  }
+}
+@media (max-width: 950px) {
+  .tabla {
+    top: 2%;
+  }
+  .enviarCorreos {
+    position: relative;
+    top: 25%;
+    left: 80%;
+  }
+  .tabla tbody {
+    height: 50vh;
+    overflow: auto;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  .tabla thead,
+  .tabla tbody,
+  .tabla td,
+  .tabla th {
+    display: block;
+  }
+  .tabla .cabecerasTabla {
+    width: 100%;
+  }
+  .tabla .cabecerasTabla .seleccionar {
+    padding-right: 5%;
+  }
+  .tabla .cabecerasTabla .nombre {
+    width: 5%;
+  }
+  .tabla .cabecerasTabla .email {
+    width: 57%;
+  }
+  .tabla .cabecerasTabla .clase {
+    display: none;
+  }
+  .tabla th {
+    text-align: center;
+    float: left;
+    border-bottom-width: 0px ;
+  }
+  .tabla td {
+    float: left;
+  }
+  .tabla td.tutor {
+    display: none;
+  }
+  .tabla th.tutor {
+    display: none;
+  }
+  .tabla td.curso {
+    display: none;
+  }
+  .tabla td.curso2 {
+    display: none;
+  }
+  .tabla td.nombre {
+    width: 40%;
+  }
+  .tabla td.acciones {
+    padding-left: 15%;
+  }
+  .tabla td.acciones2 {
+    padding-left: 20%;
+  }
+  .selectCrud {
+    margin-left: 15%;
+    margin-right: 1%;
+    position: relative;
+    top: 0%;
+  }
+  .desSelectCrud {
+    position: relative;
+    top: 0%;
+  }
+  #spanProfesores {
+    width: 100%;
+    margin-right: 30%;
+  }
+  #spanProfesores a {
+    font-size: 1.2vh;
+  }
+  #spanAlumnos {
+    width: 100%;
+  }
+  #spanAlumnos a {
+    font-size: 1.4vh;
+  }
+  #spanFilters {
+    font-size: 2vh;
+    margin-right: 30%;
+  }
+  .filters {
+    height: 5vh;
+  }
+}
+@media (max-width: 850px) {
+  .enviarCorreos {
+    position: relative;
+    top: 25%;
+    left: 80%;
+  }
+  .tabla tbody {
+    height: 50vh;
+    overflow: auto;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  .tabla thead,
+  .tabla tbody,
+  .tabla td,
+  .tabla th {
+    display: block;
+  }
+  .tabla .cabecerasTabla {
+    width: 100%;
+  }
+  .tabla .cabecerasTabla .seleccionar {
+    padding-right: 5%;
+  }
+  .tabla .cabecerasTabla .nombre {
+    width: 5%;
+  }
+  .tabla .cabecerasTabla .email {
+    width: 57%;
+  }
+  .tabla .cabecerasTabla .clase {
+    display: none;
+  }
+  .tabla th {
+    text-align: center;
+    float: left;
+    border-bottom-width: 0px ;
+  }
+  .tabla td {
+    float: left;
+  }
+  .tabla td.tutor {
+    display: none;
+  }
+  .tabla th.tutor {
+    display: none;
+  }
+  .tabla td.curso {
+    display: none;
+  }
+  .tabla td.curso2 {
+    display: none;
+  }
+  .tabla td.nombre {
+    width: 40%;
+  }
+  .tabla td.acciones {
+    padding-left: 15%;
+  }
+  .tabla td.acciones2 {
+    padding-left: 20%;
+  }
+  .registrosEncontrados {
+    position: relative;
+    top: 2%;
+    margin-left: 40%;
+    width: 35%;
+  }
+  .botonesFiltro .btn {
+    position: relative;
+    right: 10%;
+    top: -30%;
+  }
+  .filters {
+    position: relative;
+    top: 5%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #434a54;
+    width: 40%;
+    height: 8vh;
+  }
+  .nav {
+    width: 10%;
+    height: 100vh;
+    background-color: #434a54;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav a {
+    text-decoration: none;
+    font-style: Bahnschrift;
+    font-weight: Regular;
+    font-size: 20px;
+    color: #ffffff;
+  }
+  .nav #spanProfesores {
+    width: 100%;
+    margin-right: 30%;
+  }
+  .nav #spanProfesores a {
+    font-size: 1.2vh;
+  }
+  .nav #spanAlumnos {
+    width: 100%;
+  }
+  .nav #spanAlumnos a {
+    font-size: 1.4vh;
+  }
+  .nav #spanFilters {
+    font-size: 2vh;
+    margin-right: 30%;
+  }
+}
+@media (max-width: 720px) {
+  .selectCrud {
+    margin-left: 5%;
+    margin-right: 1%;
+    position: relative;
+    top: -3%;
+  }
+  .botonesFiltro {
+    position: relative;
+    right: 10%;
+    top: 10%;
+  }
+  .filters {
+    position: relative;
+    top: 5%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #434a54;
+    width: 60%;
+    height: 8vh;
+  }
+  .desSelectCrud {
+    position: relative;
+    top: -3%;
+  }
+  .enviarCorreos {
+    position: relative;
+    top: 20%;
+    margin-right: 40%;
+  }
+  .registrosEncontrados {
+    position: relative;
+    top: -9%;
+    margin-left: 62%;
+  }
+}
+@media (max-height: 650px) {
+  .enviarCorreos {
+    position: relative;
+    top: 20%;
+    left: 80%;
+  }
+}
+@media (max-height: 550px) {
+  .pagina {
+    overflow: visible;
+    height: 140vh;
+  }
+  .enviarCorreos {
+    position: relative;
+    top: 20%;
+    left: 80%;
+  }
+}
+@media (max-height: 615px) {
+  .selectCrud {
+    margin-left: 15%;
+    margin-right: 1%;
+    position: relative;
+    top: -7%;
+  }
+  .desSelectCrud {
+    position: relative;
+    top: -7%;
+  }
+  .tabla {
+    position: relative;
+    top: -5%;
+  }
+  .enviarCorreos {
+    position: relative;
+    top: 21%;
+    left: 80%;
+  }
 }
